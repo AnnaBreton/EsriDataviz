@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- ArcGIS REST API Dataviz -->
+<html>
+<head>
+    <title>Query ArcGIS REST API data Into Dataviz</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://js.arcgis.com/3.24/"></script>
+    <script type="text/javascript" src="QueryDataJS.js"></script>
+    <link rel="stylesheet" href="QueryDataCSS.css">
+
+<div id="barChart">
+    <!--width and height of graph -->
+    <svg width="960" height="500"></svg>
+    <!--Graph display setting. Clears graph lines-->
+
+</div>
+
+
+</head>
+
+<head>
+
+</head>
+<body>
+<div class="grid-container">
+
+<body>
+<div>
+    <!-- Insert URL -->
+    <form action="/action_page.php">
+        ArcGIS REST API:
+        <input type="url" name="homepage">
+        <input type="submit">
+    </form>
+</div>
+
+<div>
+    US state name :
+    <input type="text" id="state" value="California">
+    <input id="execute" type="button" value="Get Details">
+</div>
+<div>
+    Clear Chart
+    <button onclick="clearChart()">Click me</button>
+    <script>
+        function clearChart() {
+            svg.selectAll("*").remove();
+        }
+    </script>
+</div>
+
+<div>
+    <!--Insert Title section -->
+    <form action="/action_page.php">
+        Title:
+        <input type="text" name="title" value="">
+        <input type="submit" value="Submit">
+
+    </form>
+</div>
+
+<div>
+    <!-- label option on/off -->
+    <form action="/action_page.php">
+        Label:<br>
+        <input type="radio" name="gender" value="on" checked> On<br>
+        <input type="radio" name="gender" value="off"> Off<br>
+    </form>
+</div>
+
+<div>
+    <!--Dropdown menu-->
+    X-axis
+    <select>
+        <option value="v1x">Value 1</option>
+        <option value="v2x">Value 2</option>
+        <option value="v3x">Value 3</option>
+    </select>
+    <input type="submit" value="Add Value">
+</div>
+
+<div>
+    Y-axis
+    <select>
+        <option value="v1y">Value 1</option>
+        <option value="v2y">Value 2</option>
+        <option value="v3y">Value 3</option>
+    </select>
+</div>
+<div>
+    <p>Click the button to create a Color picker.</p>
+
+    <button onclick="myFunction()">Color Selector</button>
+
+    <script>
+
+    </script>
+
+</div>
+
+</body>
+
+</div>
+</body>
+</html>
