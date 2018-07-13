@@ -13,6 +13,7 @@ let x1 = d3.scaleBand().padding(0.05); //keys
 let y = d3.scaleLinear().rangeRound([height, 0]);
 let z = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#e2ab08"]);
 
+//testing for getting x-axis data
 //let xData = document.getElementById("xdata").value;
 //let xInput = [xData];
 //console.log(" X Input = " + xInput);
@@ -204,8 +205,6 @@ function UpdateChart() {
 
     let x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.1);
     let x1 = d3.scaleBand().padding(0.05); //keys
-
-    //height of the graph space that we're drawing in
     let y = d3.scaleLinear().rangeRound([height, 0]);
     let z = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#e2ab08"]);
 
@@ -223,7 +222,6 @@ function UpdateChart() {
                 return d[key];
             });
         })]).nice();
-
         //------------------bar graph stuff-------------------------------------
         g.append("g")
             .selectAll("g")
@@ -320,7 +318,6 @@ function UpdateChart() {
             });
     }
 
-
 //<!------------------------------- Update data query section ------------------------------------------------------------->
 
     require([
@@ -352,15 +349,14 @@ function UpdateChart() {
                     resultItems[attr] = Number(featureAttributes[attr]);
                 }
             }
-            draw(resultItems, dom.byId("state").value); //Need to change hard coded California so it can take state names
+            draw(resultItems, dom.byId("state").value);
             dom.byId("info").innerHTML = resultItems;
         }
     })
 }
 
 function clearChart() {
-    svg.select("*").remove(); //clears each "rect" element individually
-    //svg.selectAll("*").remove(); //clears entire graph at once
+    svg.select("*").remove();
 }
 
 function clearText() {
