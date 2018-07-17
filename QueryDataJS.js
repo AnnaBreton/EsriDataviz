@@ -1,7 +1,16 @@
 
 var resultItems3;
-
 var xInput;
+var xInput2 = [];
+
+
+function xValues() {
+    xInput = document.getElementById("xUserInput").value;
+    xInput2 = xInput.split(",");
+    console.log("xinput values" + xInput2);
+    alert(xInput2);
+}
+
 
 let svg = d3.select('svg'),
     margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -161,17 +170,21 @@ function draw(data, state) {
     console.log("draw data: " + data);
 }
 
+
 require([
+
     "dojo/dom", "dojo/on",
     "esri/tasks/query", "esri/tasks/QueryTask", "dojo/domReady!"
 ], function (dom, on, Query, QueryTask) {
     let queryTask = new QueryTask("https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
     let query = new Query();
+
+
     query.returnGeometry = false;
    // xValues();
-
+console.log("The x Input array values: " + xInput2);
     //This is where we place which fields we want on the x-axis
-    query.outFields = [xInput];
+    query.outFields = xInput2;
 
     on(dom.byId("execute"), "click", execute);
 
@@ -275,7 +288,7 @@ function UpdateChart() {
             .attr("fill", "#000")
             .attr("font-weight", "bold")
             .style("font-size", "20px")
-            .text(myTitle)
+            .text(myTitle);
 
         //state label on chart
         g.append("g")
@@ -379,10 +392,4 @@ function ColorFunction() {
     document.body.appendChild(x);
     console.log("COLOR: " + x.value);
     document.getElementById("rect").style.fill = "#000000";
-}
-
-function xValues() {
-    xInput = document.getElementById("xUserInput").value;
-    console.log(xInput);
-    alert(xInput);
 }
