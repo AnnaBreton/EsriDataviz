@@ -1,4 +1,7 @@
+
 var resultItems3;
+
+var xInput;
 
 let svg = d3.select('svg'),
     margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -165,10 +168,10 @@ require([
     let queryTask = new QueryTask("https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
     let query = new Query();
     query.returnGeometry = false;
-    query.outFields = [
-        "AGE_UNDER5", "AGE_5_17", "AGE_18_21",
-        "AGE_22_29", "AGE_30_39", "AGE_40_49", "AGE_50_64", "AGE_65_UP"
-    ];
+   // xValues();
+
+    //This is where we place which fields we want on the x-axis
+    query.outFields = [xInput];
 
     on(dom.byId("execute"), "click", execute);
 
@@ -376,4 +379,10 @@ function ColorFunction() {
     document.body.appendChild(x);
     console.log("COLOR: " + x.value);
     document.getElementById("rect").style.fill = "#000000";
+}
+
+function xValues() {
+    xInput = document.getElementById("xUserInput").value;
+    console.log(xInput);
+    alert(xInput);
 }

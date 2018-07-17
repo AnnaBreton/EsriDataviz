@@ -49,7 +49,7 @@
 
         <div>
             <!-- label option on/off -->
-            <form action="/action_page.php">
+                <form action="/action_page.php">
                 Label:<br>
                 <input type="radio" name="gender" value="on" onclick="UpdateChart()" checked> On<br>
                 <input type="radio" name="gender" value="off" onclick="clearText()"> Off<br>
@@ -58,8 +58,9 @@
 
         <div>
             X-axis
-            <input type="text" id="xData">
-            <input id="execute2" type="button" value="Get Details">
+            <input onclick="xValues()" type="button" value="X values">
+            <input type="text" id="xUserInput" value="">
+
         </div>
 
         <div>
