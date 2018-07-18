@@ -7,8 +7,8 @@ var xInput2 = [];
 function xValues() {
     xInput = document.getElementById("xUserInput").value;
     xInput2 = xInput.split(",");
-    console.log("xinput values" + xInput2);
-    alert(xInput2);
+    console.log("xinput values" +xInput2);
+    //alert(xInput2);
 }
 
 
@@ -182,13 +182,14 @@ require([
 
     query.returnGeometry = false;
    // xValues();
-console.log("The x Input array values: " + xInput2);
+    console.log("The x Input array values: " + xInput2);
     //This is where we place which fields we want on the x-axis
-    query.outFields = xInput2;
+
 
     on(dom.byId("execute"), "click", execute);
 
     function execute() {
+        query.outFields = xInput2;
         query.text = dom.byId("state").value;
         queryTask.execute(query, showResults2);
     }
@@ -343,14 +344,12 @@ function UpdateChart() {
         let queryTask = new QueryTask("https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
         let query = new Query();
         query.returnGeometry = false;
-        query.outFields = [
-            "AGE_UNDER5", "AGE_5_17", "AGE_18_21",
-            "AGE_22_29", "AGE_30_39", "AGE_40_49", "AGE_50_64", "AGE_65_UP"
-        ];
+
 
         on(dom.byId("execute"), "click", execute);
 
         function execute() {
+            query.outFields = xInput2;
             query.text = dom.byId("state").value;
             queryTask.execute(query, showResults2);
         }

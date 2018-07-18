@@ -15,17 +15,28 @@
 text {
     font-family: 'Arvo', Georgia, Times, serif;
     font-size: 10px;
-    line-height: 5px;
+    line-height: 10px;
 }
 
 div {
-    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Arvo', Georgia, Times, serif;
+    font-size: 15px;
+    display: inline-block;
+    text-align:center;
+    position: relative;
+}
+
+p{
+    font-family: 'Arvo', Georgia, Times, serif;
+    font-size: 15px;
+    line-height: 10px;
+}
+
+
+br {
     display: block;
-    padding: 1px;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    color: #333;
-    transition: all 0.3s ease-out;
+    margin: 10px;
+    line-height:10px;
 }

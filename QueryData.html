@@ -18,30 +18,33 @@
             <svg id = barsvg width="960" height="500"></svg>
         </div>
     </head>
-    <body>
     <div class="grid-container">
-
         <body>
         <div>
             <!-- Insert URL -->
+            <br>
             <form action="/action_page.php">
-                ArcGIS REST API:
+
+                ArcGIS REST API:<br>
                 <input type="url" name="homepage">
                 <input type="submit">
+
             </form>
+            <br>
         </div>
 
         <div>
-            US state name :
+            US state name :<br>
             <input type="text" id="state">
             <input id="execute" type="button" value="Get Details" position="relative">
             <button onclick="clearChart();UpdateChart();">Clear Chart</button>
             <!--<button onclick="UpdateChart()">Update</button>-->
+
         </div>
 
         <div>
             <!--Insert Title section -->
-            Title:
+            Title:<br>
             <input id="title" type="text" name="title" value="">
             <input onclick="writeTitle()" type="button" value="Title">
         </div>
@@ -57,12 +60,13 @@
         </div>
 
         <div>
-            X-axis
+            X-axis<br>
             <input onclick="xValues()" type="button" value="X values">
             <input type="text" id="xUserInput" value="">
 
         </div>
 
+        <!--
         <div>
             Y-axis
             <select>
@@ -71,6 +75,8 @@
                 <option value="v3y">Value 3</option>
             </select>
         </div>
+        -->
+
         <div>
             <p>Click the button to create a Color picker.</p>
             <button onclick="ColorFunction()">Color Selector</button>
