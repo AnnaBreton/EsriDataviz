@@ -1,8 +1,8 @@
-var resultItems3;
-var xInput;
-var xInput2 = [];
-var myTitle;
-var userAPI;
+let resultItems3;
+let xInput;
+let xInput2 = [];
+let myTitle;
+let userAPI;
 
 let svg = d3.select('svg'),
     margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -15,7 +15,6 @@ let x1 = d3.scaleBand().padding(0.05); //keys
 
 let y = d3.scaleLinear().rangeRound([height, 0]);
 let z = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#e2ab08"]);
-
 
 //Draw Function
 function draw(data, state) {
@@ -128,41 +127,37 @@ function draw(data, state) {
         });
     console.log("draw data: " + data);
 }
-require([
-
-    "dojo/dom", "dojo/on",
-    "esri/tasks/query", "esri/tasks/QueryTask", "dojo/domReady!"
-], function (dom, on, Query, QueryTask) {
+require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "dojo/domReady!"],
+    function (dom, on, Query, QueryTask) {
     let queryTask = new QueryTask("https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5" /*userAPI*/);
     let query = new Query();
     query.returnGeometry = false;
     on(dom.byId("execute"), "click", execute);
 
     function execute() {
-        query.outFields = xInput2;
-        query.text = dom.byId("state").value;
-        queryTask.execute(query, showResults2);
-    }
-
-    function showResults2(results) {
-        let resultItems = {};                                         // create an empty object that will be used to pass the json data to Draw
-        let resultCount = results.features.length;                    // get number of items the rest api returned
-        let featureAttributes;
-        for (let i = 0; i < resultCount; i++) {
-            featureAttributes = results.features[i].attributes;
-            for (let attr in featureAttributes) {
-                resultItems[attr] = Number(featureAttributes[attr]);  // this takes the JSON name and value and creates the equivalent object.
-            }
+            query.outFields = xInput2;
+            query.text = dom.byId("state").value;
+            queryTask.execute(query, showResults2);
         }
-        draw(resultItems, dom.byId("state").value);
-        dom.byId("info").innerHTML = resultItems;
+        function showResults2(results) {
+            let resultItems = {};                                         // create an empty object that will be used to pass the json data to Draw
+            let resultCount = results.features.length;                    // get number of items the rest api returned
+            let featureAttributes;
+            for (let i = 0; i < resultCount; i++) {
+                featureAttributes = results.features[i].attributes;
+                for (let attr in featureAttributes) {
+                    resultItems[attr] = Number(featureAttributes[attr]);  // this takes the JSON name and value and creates the equivalent object.
+                }
+            }
+            draw(resultItems, dom.byId("state").value);
+            dom.byId("info").innerHTML = resultItems;
+        }
     }
-});
+);
 
 
 //----------------------------------------UPDATE CHART------------------------------------------------
 function UpdateChart() {
-
 
     let svg = d3.select('svg'),
         margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -278,35 +273,34 @@ function UpdateChart() {
 
 //<!------------------------------- Update data query section ------------------------------------------------------------->
 
-    require([
-        "dojo/dom", "dojo/on",
-        "esri/tasks/query", "esri/tasks/QueryTask", "dojo/domReady!"
-    ], function (dom, on, Query, QueryTask) {
-        let queryTask = new QueryTask("https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
-        let query = new Query();
-        query.returnGeometry = false;
-        on(dom.byId("execute"), "click", execute);
+    require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "dojo/domReady!"],
+        function (dom, on, Query, QueryTask) {
+            let queryTask = new QueryTask("https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
+            let query = new Query();
+            query.returnGeometry = false;
+            on(dom.byId("execute"), "click", execute);
 
-        function execute() {
-            query.outFields = xInput2;
-            query.text = dom.byId("state").value;
-            queryTask.execute(query, showResults2);
-        }
-
-        function showResults2(results) {
-            let resultItems = {};
-            let resultCount = results.features.length;
-            let featureAttributes;
-            for (let i = 0; i < resultCount; i++) {
-                featureAttributes = results.features[i].attributes;
-                for (let attr in featureAttributes) {
-                    resultItems[attr] = Number(featureAttributes[attr]);
-                }
+            function execute() {
+                query.outFields = xInput2;
+                query.text = dom.byId("state").value;
+                queryTask.execute(query, showResults2);
             }
-            draw(resultItems, dom.byId("state").value);
-            dom.byId("info").innerHTML = resultItems;
+
+            function showResults2(results) {
+                let resultItems = {};
+                let resultCount = results.features.length;
+                let featureAttributes;
+                for (let i = 0; i < resultCount; i++) {
+                    featureAttributes = results.features[i].attributes;
+                    for (let attr in featureAttributes) {
+                        resultItems[attr] = Number(featureAttributes[attr]);
+                    }
+                }
+                draw(resultItems, dom.byId("state").value);
+                dom.byId("info").innerHTML = resultItems;
+            }
         }
-    })
+    )
 }
 
 function clearChart() {
