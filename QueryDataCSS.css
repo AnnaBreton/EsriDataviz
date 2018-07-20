@@ -16,6 +16,7 @@ text {
     font-family: 'Arvo', Georgia, Times, serif;
     font-size: 10px;
     line-height: 10px;
+    position: relative;
 }
 
 div {
