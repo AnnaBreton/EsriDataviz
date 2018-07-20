@@ -1,15 +1,10 @@
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 10px;
-    background-color: rgba(217,217,217,0.47);
-    padding: 10px;
-}
+
 .grid-container > div {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid black;
     text-align: center;
     font-size: 15px;
+
 }
 
 text {
@@ -24,9 +19,23 @@ div {
     padding-bottom: 10px;
     font-family: 'Arvo', Georgia, Times, serif;
     font-size: 15px;
-    display: inline-block;
     text-align:center;
-    position: relative;
+
+}
+#Inputs{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Arvo', Georgia, Times, serif;
+    font-size: 15px;
+    text-align:center;
+    position: absolute;
+    top: 60%;
+    left: 48%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 200px;
+    height: 300px;
+
 }
 
 p{

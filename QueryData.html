@@ -26,7 +26,7 @@
 
 <div class="grid-container">
     <body>
-    <div>
+    <div id="Inputs">
         <!-- Insert URL -->
         ArcGIS REST API:
         <br>
@@ -46,34 +46,28 @@
         <br>
         <input id="title" type="text" name="title" value="">
         <br>
-        <input id="execute" type="button" value="Get Details" onclick="xValues(),APIValue(), writeTitle()">
-        <br>
-        <button onclick="clearChart();UpdateChart();">Clear Chart</button>
-
-    </div>
-
-    <div>
         <!-- label option on/off -->
         <form action="/action_page.php">
             Label:<br>
             <input type="radio" name="gender" value="on" onclick="UpdateChart()" checked> On<br>
             <input type="radio" name="gender" value="off" onclick="clearText()"> Off<br>
         </form>
+        <br>
+        <input id="execute" type="button" value="Get Details" onclick="xValues(),APIValue(), writeTitle()">
+        <button onclick="clearChart();UpdateChart();">Clear Chart</button>
+        <br>
+        <a id="download" href="#">Download SVG</button></a>
+
     </div>
 
-
+<!--
     <div>
         <p>Click the button to create a Color picker.</p>
         <button onclick="ColorFunction()">Color Selector</button>
 
     </div>
+    -->
     <script type="text/javascript" src="QueryDataJS.js"></script>
     </body>
-
-    <div>
-        <button onclick="drawCanvas()">drawCanvas</button>
-        <button onclick="downloadPNG()">downloadPNG</button>
-        <button onclick="downloadPDF()">downloadPDF</button>
-    </div>
 
 </div>
