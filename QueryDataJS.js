@@ -2,7 +2,7 @@ let resultItems3;
 let xInput;
 let xInput2 = [];
 let myTitle;
-let userAPI;
+let userAPI = "";
 
 let svg = d3.select('svg'),
     margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -129,12 +129,12 @@ function draw(data, state) {
 }
 require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "dojo/domReady!"],
     function (dom, on, Query, QueryTask) {
-    let queryTask = new QueryTask("https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5" /*userAPI*/);
-    let query = new Query();
-    query.returnGeometry = false;
     on(dom.byId("execute"), "click", execute);
 
     function execute() {
+        let queryTask = new QueryTask(/*"https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5"*/ userAPI);
+        let query = new Query();
+        query.returnGeometry = false;
             query.outFields = xInput2;
             query.text = dom.byId("state").value;
             queryTask.execute(query, showResults2);
@@ -275,12 +275,12 @@ function UpdateChart() {
 
     require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "dojo/domReady!"],
         function (dom, on, Query, QueryTask) {
-            let queryTask = new QueryTask("https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
-            let query = new Query();
-            query.returnGeometry = false;
             on(dom.byId("execute"), "click", execute);
 
             function execute() {
+                let queryTask = new QueryTask(/*"https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5"*/ userAPI);
+                let query = new Query();
+                query.returnGeometry = false;
                 query.outFields = xInput2;
                 query.text = dom.byId("state").value;
                 queryTask.execute(query, showResults2);
@@ -333,4 +333,5 @@ function xValues() {
 //function for getting REST API
 function APIValue() {
     userAPI = document.getElementById("APIInput").value;
+    console.log(" API input " + userAPI);
 }
