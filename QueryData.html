@@ -28,25 +28,28 @@
     <body>
     <div>
         <!-- Insert URL -->
+        ArcGIS REST API:
         <br>
-        ArcGIS REST API:<br>
-        <input onclick="APIValue()" type="button" value="URL">
+        <!--<input onclick="APIValue()" type="button" value="URL">-->
         <input type="text" id="APIInput" value="">
-    </div>
 
-    <div>
-        US state name :<br>
+        <br>
+        US state name :
+        <br>
         <input type="text" id="state">
-        <input id="execute" type="button" value="Get Details" position="relative">
+        <br>
+        X-axis<br>
+        <!--<input onclick="xValues()" type="button" value="X values">-->
+        <input type="text" id="xUserInput" value="">
+        <br>
+        Title:
+        <br>
+        <input id="title" type="text" name="title" value="">
+        <br>
+        <input id="execute" type="button" value="Get Details" onclick="xValues(),APIValue(), writeTitle()">
+        <br>
         <button onclick="clearChart();UpdateChart();">Clear Chart</button>
 
-    </div>
-
-    <div>
-        <!--Insert Title section -->
-        Title:<br>
-        <input id="title" type="text" name="title" value="">
-        <input onclick="writeTitle()" type="button" value="Title">
     </div>
 
     <div>
@@ -58,12 +61,6 @@
         </form>
     </div>
 
-    <div>
-        X-axis<br>
-        <input onclick="xValues()" type="button" value="X values">
-        <input type="text" id="xUserInput" value="">
-
-    </div>
 
     <div>
         <p>Click the button to create a Color picker.</p>
