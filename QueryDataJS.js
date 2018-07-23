@@ -1,14 +1,15 @@
-let resultItems3;
 let xInput;
 let xInput2 = [];
 let myTitle;
 let userAPI = "";
 
-let svg = d3.select('svg'),
+let svg = d3.select('svg')  .attr("id", "visualization")
+    .attr("xmlns", "http://www.w3.org/2000/svg")
     margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 let x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.1);
 let x1 = d3.scaleBand().padding(0.05); //keys
@@ -39,9 +40,13 @@ function draw(data, state) {
         .selectAll("g")
         .data([data])
         .enter().append("g")
-        .attr("transform", function () {
+        .attr("id", "visualization")
+        .attr("xmlns", "http://www.w3.org/2000/svg","xmlns: svg=", "http://www.w3.org/2000/svg")
+        .attr("transform", function ()
+        {
             return "translate( 1,0)";
         })
+
         .selectAll("rect")
         .data(function (d) {
             console.log("RECT" + keys.map(function (key) {
@@ -70,7 +75,8 @@ function draw(data, state) {
         .attr("fill", function (d) {
             return z(d.key);
         })
-        .attr("xmlns", "http://www.w3.org/2000/svg");
+        .attr("id", "visualization")
+        .attr("xmlns", "http://www.w3.org/2000/svg")
 
 
     //-------------------label and legend stuff--------------------------
@@ -111,6 +117,8 @@ function draw(data, state) {
         .selectAll("g")
         .data(keys.slice().reverse())
         .enter().append("g")
+        .attr("id", "visualization")
+        .attr("xmlns", "http://www.w3.org/2000/svg")
         .attr("transform", function (d, i) {
             return "translate(0," + i * 20 + ")";
         });
@@ -128,12 +136,6 @@ function draw(data, state) {
         .text(function (d) {
             return d;
         })
-
-    d3.select("#download").on("click", function () {
-        d3.select(this)
-            .attr("href", 'data:application/octet-stream;base64,' + btoa(d3.select("svg").html()))
-            .attr("download", "viz.svg")
-    });
     console.log("draw data: " + data);
 }
 
@@ -280,6 +282,7 @@ function UpdateChart() {
             .text(function (d) {
                 return d;
             });
+
     }
 
 //<!------------------------------- Update data query section ------------------------------------------------------------->
@@ -347,3 +350,11 @@ function APIValue() {
     userAPI = document.getElementById("APIInput").value;
     console.log(" API input " + userAPI);
 }
+
+
+//Download
+d3.select("#download").on("click", function () {
+    d3.select(this)
+        .attr("href", 'data:application/octet-stream;base64,' + btoa(d3.select("svg").html()))
+        .attr("download", "viz.svg")
+});
