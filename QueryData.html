@@ -15,13 +15,13 @@
     <script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
 </head>
 <head>
     <div id="barChart">
         <!--width and height of graph -->
         <svg xmlns="http://www.w3.org/2000/svg"
-             xmlns: svg="http://www.w3.org/2000/svg"
-              id=barsvg width="960" height="500"></svg>
+             id=barsvg width="960" height="500"></svg>
     </div>
 </head>
 
@@ -59,15 +59,30 @@
         <br>
         <a id="download" href="#">Download SVG</button></a>
 
+
+        <!-- Features that need improvement-----------------------------------------------------------
+
+        <br>
+        <br>
+        <button onclick="newDownload()"> Test download</button>
+-->
+
+        <br>
+        <br>
+        Dropdown test
+        <select id="locality-dropdown" name="locality">
+        </select>
+
+
     </div>
 
-<!--
-    <div>
-        <p>Click the button to create a Color picker.</p>
-        <button onclick="ColorFunction()">Color Selector</button>
 
-    </div>
-    -->
+    <!--
+        <div>
+            <p>Click the button to create a Color picker.</p>
+            <button onclick="ColorFunction()">Color Selector</button>
+        </div>
+        -->
     <script type="text/javascript" src="QueryDataJS.js"></script>
     </body>
 

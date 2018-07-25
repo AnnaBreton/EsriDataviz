@@ -3,7 +3,8 @@ let xInput2 = [];
 let myTitle;
 let userAPI = "";
 
-let svg = d3.select('svg')  .attr("id", "visualization")
+let svg = d3.select('svg')
+    .attr("id", "visualization")
     .attr("xmlns", "http://www.w3.org/2000/svg")
     margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
@@ -41,9 +42,8 @@ function draw(data, state) {
         .data([data])
         .enter().append("g")
         .attr("id", "visualization")
-        .attr("xmlns", "http://www.w3.org/2000/svg","xmlns: svg=", "http://www.w3.org/2000/svg")
-        .attr("transform", function ()
-        {
+        .attr("xmlns", "http://www.w3.org/2000/svg", "xmlns: svg=", "http://www.w3.org/2000/svg")
+        .attr("transform", function () {
             return "translate( 1,0)";
         })
 
@@ -75,9 +75,6 @@ function draw(data, state) {
         .attr("fill", function (d) {
             return z(d.key);
         })
-        .attr("id", "visualization")
-        .attr("xmlns", "http://www.w3.org/2000/svg")
-
 
     //-------------------label and legend stuff--------------------------
 
@@ -117,8 +114,6 @@ function draw(data, state) {
         .selectAll("g")
         .data(keys.slice().reverse())
         .enter().append("g")
-        .attr("id", "visualization")
-        .attr("xmlns", "http://www.w3.org/2000/svg")
         .attr("transform", function (d, i) {
             return "translate(0," + i * 20 + ")";
         });
@@ -168,11 +163,14 @@ require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "doj
     }
 );
 
-
+//----------------------------------------------------------------------------------------------------
 //----------------------------------------UPDATE CHART------------------------------------------------
+//----------------------------------------------------------------------------------------------------
 function UpdateChart() {
 
-    let svg = d3.select('svg'),
+    let svg = d3.select('svg')
+        .attr("id", "visualization")
+        .attr("xmlns", "http://www.w3.org/2000/svg"),
         margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom,
@@ -201,6 +199,8 @@ function UpdateChart() {
             .selectAll("g")
             .data([data])
             .enter().append("g")
+            .attr("id", "visualization")
+            .attr("xmlns", "http://www.w3.org/2000/svg", "xmlns: svg=", "http://www.w3.org/2000/svg")
             .attr("transform", function () {
                 return "translate( 1,0)";
             })
@@ -282,7 +282,6 @@ function UpdateChart() {
             .text(function (d) {
                 return d;
             });
-
     }
 
 //<!------------------------------- Update data query section ------------------------------------------------------------->
@@ -351,10 +350,61 @@ function APIValue() {
     console.log(" API input " + userAPI);
 }
 
+//--------------------------------------------------------------------------------------- Download ¯\_(ツ)_/¯
 
-//Download
+
 d3.select("#download").on("click", function () {
     d3.select(this)
-        .attr("href", 'data:application/octet-stream;base64,' + btoa(d3.select("svg").html()))
+        .attr("href", 'data:application/octet-stream;base64,' + btoa("<svg xmlns=\"http://www.w3.org/2000/svg\"> " + d3.select("svg").html() +"</svg>"))
         .attr("download", "viz.svg")
 });
+
+//----------------------------------------Create dropdown based on get request from url. Reads in JSON data
+
+let dropdown = document.getElementById('locality-dropdown');
+dropdown.length = 0;
+
+let defaultOption = document.createElement('option');
+defaultOption.text = 'Choose Option';
+
+dropdown.add(defaultOption);
+dropdown.selectedIndex = 0;
+
+const url = 'https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5?f=json&pretty=true';
+
+const request = new XMLHttpRequest();
+
+request.onload = function() {
+    if (this.readyState === 4 && this.status === 200) {
+        const data = JSON.parse(this.responseText);
+        let option;
+        for (let i = 0; i < data.length; i++) {
+            option = document.createElement('option');
+            option.text = data[i].name;
+            option.value = data[i].alias;
+            dropdown.add(option);
+        }
+    } else {
+        // Reached the server, but it returned an error
+    }
+}
+
+request.onerror = function(error) {
+    console.error('An error occurred fetching the JSON from ' + url);
+};
+request.open('GET', url, true);
+request.send();
+
+//____________________________________________________________________________________________________________
+function newDownload() {
+    var svgData = $("svg")[0].outerHTML;
+    var svgBlob = new Blob([svgData], {type: "image/svg+xml;charset=utf-8"});
+    var svgUrl = URL.createObjectURL(svgBlob);
+    var downloadLink = document.createElement("a");
+    downloadLink.href = svgUrl;
+    downloadLink.download = "new.svg";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+}
+
