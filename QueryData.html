@@ -25,57 +25,67 @@
     </div>
 </head>
 
+
+<body>
+
 <div class="grid-container">
+
+    <form class="form-style-7">
     <body>
-    <div id="Inputs">
-        <!-- Insert URL -->
-        ArcGIS REST API:
-        <br>
-        <!--<input onclick="APIValue()" type="button" value="URL">-->
-        <input type="text" id="APIInput" value="">
+    <h1>Fill Form</h1>
+    <ul>
 
-        <br>
-        US state name :
-        <br>
-        <input type="text" id="state">
-        <br>
-        X-axis<br>
-        <!--<input onclick="xValues()" type="button" value="X values">-->
-        <input type="text" id="xUserInput" value="">
-        <br>
-        Title:
-        <br>
-        <input id="title" type="text" name="title" value="">
-        <br>
-        <!-- label option on/off -->
-        <form action="/action_page.php">
-            Label:<br>
-            <input type="radio" name="gender" value="on" onclick="UpdateChart()" checked> On<br>
-            <input type="radio" name="gender" value="off" onclick="clearText()"> Off<br>
-        </form>
-        <br>
-        <input id="execute" type="button" value="Get Details" onclick="xValues(),APIValue(), writeTitle()">
-        <button onclick="clearChart();UpdateChart();">Clear Chart</button>
-        <br>
-        <a id="download" href="#">Download SVG</button></a>
+        <div id="Inputs">
+            <!-- Insert URL -->
+            <li>
+                <label for="APIInput">ArcGIS Rest API</label>
+                <input type="text" id="APIInput" value="">
+                <span>Enter your url here</span>
+            </li>
+
+            <li>
+                <label for="state">State name</label>
+                <input type="text" id="state">
+                <span>Enter your State name here</span>
+            </li>
+
+            <li>
+                <label for="xUserInput">X-axis</label>
+                <input type="text" id="xUserInput" value="">
+                <span>Enter your X-axis values here</span>
+            </li>
 
 
-        <!-- Features that need improvement-----------------------------------------------------------
+            <li>
+                <label for="title">Graph Title</label>
+                <input id="title" type="text" name="title" value="">
+                <span>Enter your title here</span>
+            </li>
 
-        <br>
-        <br>
-        <button onclick="newDownload()"> Test download</button>
--->
+        </li>
+            <!-- label option on/off -->
+            <form action="/action_page.php">
+                Label:<br>
+                <input type="radio" name="gender" value="on" onclick="UpdateChart()" checked> On<br>
+                <input type="radio" name="gender" value="off" onclick="clearText()"> Off<br>
+            </form>
+        </li>
 
-        <br>
-        <br>
-        Dropdown test
-        <select id="locality-dropdown" name="locality">
-        </select>
+            <input id="execute" type="button" value="Get Details" onclick="xValues(),APIValue(), writeTitle()">
+            <input type="button" value="Clear Chart" onclick="clearChart();UpdateChart();">
+            <a id="download" href="#">Download SVG</button></a>
 
+            <br>
+            <br>
+<!--
+            Dropdown test
+            <select id="locality-dropdown" name="locality">
+            </select>
+            -->
+            <br>
+        </div>
 
-    </div>
-
+    </ul>
 
     <!--
         <div>
@@ -86,4 +96,7 @@
     <script type="text/javascript" src="QueryDataJS.js"></script>
     </body>
 
+    </form>
 </div>
+
+</body>

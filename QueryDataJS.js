@@ -291,7 +291,7 @@ function UpdateChart() {
             on(dom.byId("execute"), "click", execute);
 
             function execute() {
-                let queryTask = new QueryTask(/*"https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5"*/ userAPI);
+                let queryTask = new QueryTask(userAPI);
                 let query = new Query();
                 query.returnGeometry = false;
                 query.outFields = xInput2;
@@ -390,7 +390,7 @@ request.onload = function() {
 }
 
 request.onerror = function(error) {
-    console.error('An error occurred fetching the JSON from ' + url);
+    console.error('An error occurred fetching the JSON from ' + error);
 };
 request.open('GET', url, true);
 request.send();
