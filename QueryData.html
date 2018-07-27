@@ -10,11 +10,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
     <link rel="stylesheet" href="QueryDataCSS.css" type="text/css">
     <script type="text/javascript" src="//d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
 
 </head>
 <head>
@@ -62,26 +64,27 @@
                 <span>Enter your title here</span>
             </li>
 
+            <!-- label option on/off
         </li>
-            <!-- label option on/off -->
+
             <form action="/action_page.php">
                 Label:<br>
                 <input type="radio" name="gender" value="on" onclick="UpdateChart()" checked> On<br>
                 <input type="radio" name="gender" value="off" onclick="clearText()"> Off<br>
             </form>
         </li>
-
+-->
             <input id="execute" type="button" value="Get Details" onclick="xValues(),APIValue(), writeTitle()">
             <input type="button" value="Clear Chart" onclick="clearChart();UpdateChart();">
             <a id="download" href="#">Download SVG</button></a>
 
             <br>
             <br>
-<!--
+
             Dropdown test
             <select id="locality-dropdown" name="locality">
             </select>
-            -->
+
             <br>
         </div>
 
