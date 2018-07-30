@@ -1,17 +1,18 @@
+// Right now run code in chrome after running: chrome.exe --disable-web-security --user-data-dir
+//this fixes CORS problem for now
+
 let xInput;
 let xInput2 = [];
 let myTitle;
 let userAPI = "";
 
 
-// Add a known server to the list.
-
+// An attempt to add a known server to the list. From ArcGIS CORS API. BREAKS CODE!!!!!
+/*
 require(["esri/config"], function (esriConfig) {
     esriConfig.defaults.io.corsEnabledServers.push("sampleserver1.arcgisonline.com/ArcGIS/rest");
 });
 
-
-/*
 require(["esri/config"], function(esriConfig) {   esriConfig.defaults.io.useCors = false; });
 
 require(["esri/config"], function(esriConfig) {
@@ -163,12 +164,15 @@ require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "doj
             query.returnGeometry = false;
             query.outFields = xInput2;
             query.text = dom.byId("state").value;
+            console.log("getting ready to execute query")
             queryTask.execute(query, showResults2);
+            console.log("executed query")
         }
 
         function showResults2(results) {
             let resultItems = {};                                         // create an empty object that will be used to pass the json data to Draw
             let resultCount = results.features.length;                    // get number of items the rest api returned
+            console.log("reult count " + resultCount);
             let featureAttributes;
             for (let i = 0; i < resultCount; i++) {
                 featureAttributes = results.features[i].attributes;
@@ -177,7 +181,7 @@ require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "doj
                 }
             }
             draw(resultItems, dom.byId("state").value);
-            dom.byId("info").innerHTML = resultItems;
+           // dom.byId("info").innerHTML = resultItems;
         }
     }
 );
@@ -379,58 +383,57 @@ d3.select("#download").on("click", function () {
 
 //----------------------------------------Create dropdown based on get request from url. Reads in JSON data. AJAX request
 
-let dropdown = document.getElementById('locality-dropdown');
-dropdown.length = 0;
+function dropdownfunc() {
+    let dropdown = document.getElementById('locality-dropdown');
+    dropdown.length = 0;
 
-let defaultOption = document.createElement('option');
-defaultOption.text = 'Choose Option';
+    let defaultOption = document.createElement('option');
+    defaultOption.text = 'Choose Option';
 
-dropdown.add(defaultOption);
-dropdown.selectedIndex = 0;
+    dropdown.add(defaultOption);
+    dropdown.selectedIndex = 0;
 
-const url = ('https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5?f=json&pretty=true');
-/* get request works, you can test with 'https://api.myjson.com/bins/7xq2x' */
+    const url = ('https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5?f=json&pretty=true');
+    /* get request works, you can test with 'https://api.myjson.com/bins/7xq2x' */
 
-const request = new XMLHttpRequest();
+    const request = new XMLHttpRequest();
 
-request.onload = function () {
-    console.log("Getting Data");
-    if (this.readyState === 4 && this.status === 200) {
-        //console.log( "Response text " + this.responseText);
-        let data = JSON.parse(this.responseText);
-        console.log("Our data " + data);
-        let option;
-        console.log("data " + data.length);
-        data.forEach(function mydata(xdata){
-            console.log("xdata:" + xdata);
-            option = document.createElement('option');
-            option.text = xdata.name;
-            option.value = xdata.alias;
-            console.log("options " + option + " " + option.text + " " + option.value);
-            dropdown.add(option);
+    request.onload = function () {
+        console.log("Getting Data!!!!!!!");
+        if (this.readyState === 4 && this.status === 200) {
+            console.log("Response text " + this.responseText);
+            let data = JSON.parse(this.responseText);
+            console.log("Our data " + data);
+            let option;
+            console.log( Object.keys(data).length );
 
-        })
-    } else {
-        // Reached the server, but it returned an error
-    }
-};
 
-request.onerror = function (error) {
-    console.error('An error occurred fetching the JSON from ' + error);
-};
-request.open('GET', url, true);
-request.send();
+            //let ObjKeys = Object.keys(data);
+            let ObjValues = Object.values(data);
+            let XAxisValues = data.fields.length;
 
-//____________________________________________________________________________________________________________
-function newDownload() {
-    var svgData = $("svg")[0].outerHTML;
-    var svgBlob = new Blob([svgData], {type: "image/svg+xml;charset=utf-8"});
-    var svgUrl = URL.createObjectURL(svgBlob);
-    var downloadLink = document.createElement("a");
-    downloadLink.href = svgUrl;
-    downloadLink.download = "new.svg";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+            for ( i= 0 ; i < XAxisValues; i++) {
+                let item_name = data.fields[i].name;
+               //console.log("THE ITEM " + item_name);
+                //console.log("THE OBJ " + ObjValues[i]);
+                var x = document.getElementById("locality-dropdown").selectedIndex;
+                option = document.createElement('option');
+                option.text = item_name;
+                option.value = item_name;
+                //console.log("options " + option + " " + option.text + " " + option.value);
+                dropdown.add(option);
+            }
+
+        } else {
+            console.log("Reached the server, but it returned an error")
+            // Reached the server, but it returned an error
+        }
+    };
+
+    request.onerror = function (error) {
+        console.log("An error occurred fetching the JSON from: " + error);
+    };
+    request.open('GET', url, true);
+    //console.log("Calling Ajax send");
+    request.send();
 }
-

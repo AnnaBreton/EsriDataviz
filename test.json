@@ -1,0 +1,264 @@
+{
+  "currentVersion" : 10.01,
+  "id" : 5,
+  "name" : "states",
+  "type" : "Feature Layer",
+  "description" : "This service presents various population statistics from Census 2000, including total population, population density, racial counts, and more. The map service presents statistics at the state, county, block group, and block point levels.\n",
+  "definitionExpression" : "",
+  "geometryType" : "esriGeometryPolygon",
+  "copyrightText" : "US Bureau of the Census: http://www.census.gov",
+  "parentLayer" : null,
+  "subLayers" : [],
+  "minScale" : 0,
+  "maxScale" : 0,
+  "defaultVisibility" : true,
+  "extent" : {
+    "xmin" : -178.217598362366,
+    "ymin" : 18.921786345087,
+    "xmax" : -66.9692709841984,
+    "ymax" : 71.4062353672549,
+    "spatialReference" : {
+      "wkid" : 4269
+    }
+  },
+  "hasAttachments" : false,
+  "htmlPopupType" : "esriServerHTMLPopupTypeNone",
+  "drawingInfo" : {"renderer" :
+  {
+    "type" : "simple",
+    "symbol" :
+    {
+      "type" : "esriSFS",
+      "style" : "esriSFSSolid",
+      "color" : null,
+      "outline" :
+      {
+        "type" : "esriSLS",
+        "style" : "esriSLSSolid",
+
+        "color" : [
+          0,
+          0,
+          0,
+          255
+        ],
+        "width" : 2
+      }
+    },
+    "label" : "",
+    "description" : ""
+  },
+    "transparency" : 0,
+    "labelingInfo" : null},
+  "displayField" : "STATE_NAME",
+  "fields" : [
+    {
+      "name" : "ObjectID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "ObjectID"},
+    {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape"},
+    {
+      "name" : "STATE_NAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "STATE_NAME",
+      "length" : 25},
+    {
+      "name" : "STATE_FIPS",
+      "type" : "esriFieldTypeString",
+      "alias" : "STATE_FIPS",
+      "length" : 2},
+    {
+      "name" : "SUB_REGION",
+      "type" : "esriFieldTypeString",
+      "alias" : "SUB_REGION",
+      "length" : 20},
+    {
+      "name" : "STATE_ABBR",
+      "type" : "esriFieldTypeString",
+      "alias" : "STATE_ABBR",
+      "length" : 2},
+    {
+      "name" : "POP2000",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "POP2000"},
+    {
+      "name" : "POP2007",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "POP2007"},
+    {
+      "name" : "POP00_SQMI",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "POP00_SQMI"},
+    {
+      "name" : "POP07_SQMI",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "POP07_SQMI"},
+    {
+      "name" : "WHITE",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "WHITE"},
+    {
+      "name" : "BLACK",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "BLACK"},
+    {
+      "name" : "AMERI_ES",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "AMERI_ES"},
+    {
+      "name" : "ASIAN",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ASIAN"},
+    {
+      "name" : "HAWN_PI",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "HAWN_PI"},
+    {
+      "name" : "OTHER",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "OTHER"},
+    {
+      "name" : "MULT_RACE",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "MULT_RACE"},
+    {
+      "name" : "HISPANIC",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "HISPANIC"},
+    {
+      "name" : "MALES",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "MALES"},
+    {
+      "name" : "FEMALES",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "FEMALES"},
+    {
+      "name" : "AGE_UNDER5",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "AGE_UNDER5"},
+    {
+      "name" : "AGE_5_17",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "AGE_5_17"},
+    {
+      "name" : "AGE_18_21",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "AGE_18_21"},
+    {
+      "name" : "AGE_22_29",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "AGE_22_29"},
+    {
+      "name" : "AGE_30_39",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "AGE_30_39"},
+    {
+      "name" : "AGE_40_49",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "AGE_40_49"},
+    {
+      "name" : "AGE_50_64",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "AGE_50_64"},
+    {
+      "name" : "AGE_65_UP",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "AGE_65_UP"},
+    {
+      "name" : "MED_AGE",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "MED_AGE"},
+    {
+      "name" : "MED_AGE_M",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "MED_AGE_M"},
+    {
+      "name" : "MED_AGE_F",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "MED_AGE_F"},
+    {
+      "name" : "HOUSEHOLDS",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "HOUSEHOLDS"},
+    {
+      "name" : "AVE_HH_SZ",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "AVE_HH_SZ"},
+    {
+      "name" : "HSEHLD_1_M",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "HSEHLD_1_M"},
+    {
+      "name" : "HSEHLD_1_F",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "HSEHLD_1_F"},
+    {
+      "name" : "MARHH_CHD",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "MARHH_CHD"},
+    {
+      "name" : "MARHH_NO_C",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "MARHH_NO_C"},
+    {
+      "name" : "MHH_CHILD",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "MHH_CHILD"},
+    {
+      "name" : "FHH_CHILD",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "FHH_CHILD"},
+    {
+      "name" : "FAMILIES",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "FAMILIES"},
+    {
+      "name" : "AVE_FAM_SZ",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "AVE_FAM_SZ"},
+    {
+      "name" : "HSE_UNITS",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "HSE_UNITS"},
+    {
+      "name" : "VACANT",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "VACANT"},
+    {
+      "name" : "OWNER_OCC",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "OWNER_OCC"},
+    {
+      "name" : "RENTER_OCC",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "RENTER_OCC"},
+    {
+      "name" : "NO_FARMS97",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "NO_FARMS97"},
+    {
+      "name" : "AVG_SIZE97",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "AVG_SIZE97"},
+    {
+      "name" : "CROP_ACR97",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "CROP_ACR97"},
+    {
+      "name" : "AVG_SALE97",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "AVG_SALE97"},
+    {
+      "name" : "SQMI",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "SQMI"}
+  ],
+  "typeIdField" : null,
+  "types" : null,
+  "relationships" : [],
+  "capabilities" : "Map,Query,Data"
+}
