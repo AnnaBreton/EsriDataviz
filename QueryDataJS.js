@@ -1,32 +1,12 @@
-// Right now run code in chrome after running: chrome.exe --disable-web-security --user-data-dir
-//this fixes CORS problem for now
-
 let xInput;
 let xInput2 = [];
 let myTitle;
 let userAPI = "";
 
-
-// An attempt to add a known server to the list. From ArcGIS CORS API. BREAKS CODE!!!!!
-/*
-require(["esri/config"], function (esriConfig) {
-    esriConfig.defaults.io.corsEnabledServers.push("sampleserver1.arcgisonline.com/ArcGIS/rest");
-});
-
-require(["esri/config"], function(esriConfig) {   esriConfig.defaults.io.useCors = false; });
-
-require(["esri/config"], function(esriConfig) {
-    esriConfig.defaults.io.corsEnabledServers.push({
-        host: "sampleserver1.arcgisonline.com",
-        withCredentials: true
-    })
-});
-*/
-
 let svg = d3.select('svg')
     .attr("id", "visualization")
     .attr("xmlns", "http://www.w3.org/2000/svg")
-margin = {top: 20, right: 20, bottom: 30, left: 40},
+    margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g")
@@ -116,7 +96,7 @@ function draw(data, DisplayField) {
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x0));
 
-    g.append("g")                                                    //population text on chart
+    g.append("g")                                                    //Y-Axis text on chart
         .attr("class", "axis")
         .call(d3.axisLeft(y).ticks(null, "s"))
         .append("text")
@@ -126,7 +106,7 @@ function draw(data, DisplayField) {
         .attr("fill", "#000")
         .attr("font-weight", "bold")
         .attr("text-anchor", "start")
-        .text("Population");
+        .text("Y-Axis");
     let legend = g.append("g")
         .attr("font-family", "sans-serif")
         .attr("font-size", 10)
@@ -279,7 +259,7 @@ function UpdateChart() {
             .attr("fill", "#000")
             .attr("font-weight", "bold")
             .attr("text-anchor", "start")
-            .text("Population");
+            .text("Y-Axis");
         let legend = g.append("g")
             .attr("font-family", "sans-serif")
             .attr("font-size", 10)
@@ -381,63 +361,10 @@ d3.select("#download").on("click", function () {
         .attr("download", "viz.svg")
 });
 
-//----------------------------------------Create dropdown based on get request from url. Reads in JSON data. AJAX request
-/*
-function dropdownfunc() {
-    let dropdown = document.getElementById('locality-dropdown');
-    dropdown.length = 0;
 
-    let defaultOption = document.createElement('option');
-    defaultOption.text = 'Choose Option';
-
-    dropdown.add(defaultOption);
-    dropdown.selectedIndex = 0;
-
-    const url = ('https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5?f=json&pretty=true');
-
-    const request = new XMLHttpRequest();
-
-    request.onload = function () {
-        console.log("Getting Data!!!!!!!");
-        if (this.readyState === 4 && this.status === 200) {
-            console.log("Response text " + this.responseText);
-            let data = JSON.parse(this.responseText);
-            console.log("Our data " + data);
-            let option;
-            console.log( Object.keys(data).length );
-
-
-            //let ObjKeys = Object.keys(data);
-            let ObjValues = Object.values(data);
-            let XAxisValues = data.fields.length;
-
-            for ( i= 0 ; i < XAxisValues; i++) {
-                let item_name = data.fields[i].name;
-               //console.log("THE ITEM " + item_name);
-                //console.log("THE OBJ " + ObjValues[i]);
-                var x = document.getElementById("locality-dropdown").selectedIndex;
-                option = document.createElement('option');
-                option.text = item_name;
-                option.value = item_name;
-                //console.log("options " + option + " " + option.text + " " + option.value);
-                dropdown.add(option);
-            }
-
-        } else {
-            console.log("Reached the server, but it returned an error")
-            // Reached the server, but it returned an error
-        }
-    };
-
-    request.onerror = function (error) {
-        console.log("An error occurred fetching the JSON from: " + error);
-    };
-    request.open('GET', url, true);
-    //console.log("Calling Ajax send");
-    request.send();
-}
-*/
-
+//----------------------------------------------------------------------------------------------------------------------------
+//----------------------------------Return ArcGIS Service Content-------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------
 
     require(["dojo/dom", "dojo/on", "dojo/dom-class", "dojo/_base/json", "dojo/_base/array", "dojo/string", "esri/request", "dojo/domReady!"], function(dom, on, domClass, dojoJson, array, dojoString, esriRequest) {
 
@@ -445,7 +372,6 @@ function dropdownfunc() {
         dom.byId("content").value = "";
         //handle the Go button's click event
         on(dom.byId("execute"), "click", getContent);
-
 
         function getContent(){
 
@@ -504,7 +430,5 @@ function dropdownfunc() {
             dom.byId("content").value = dojoJson.toJson(error, true);
 
         }
-
-
     });
 
