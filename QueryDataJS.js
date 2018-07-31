@@ -40,14 +40,14 @@ let z = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a
 
 
 //Draw Function
-function draw(data, state) {
+function draw(data, DisplayField) {
 
     console.log("keys" + Object.keys(data));
     for (let attr in data)
         console.log("draw()- key:" + attr + ", value: " + data[attr]);
     keys = Object.keys(data);                                           // with the JSON data, we use the built in Object.keys method to get the keys from the object
 
-    x0.domain([state]);                                                 // now with the JSON data, we grab the state using the STATE_NAME key
+    x0.domain([DisplayField]);                                                 // now with the JSON data, we grab the display field which can be found in the rest services directory
     x1.domain(keys).rangeRound([0, x0.bandwidth()]);
 
     y.domain([0, d3.max([data], function (d) {
@@ -111,7 +111,7 @@ function draw(data, state) {
         .style("font-size", "20px")
         .text(myTitle)
 
-    g.append("g")                                                    //state label on chart
+    g.append("g")                                                    //Display Field label on chart
         .attr("class", "axis")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x0));
@@ -150,7 +150,7 @@ function draw(data, state) {
 
         .text(function (d) {
             return d;
-        })
+        });
     console.log("draw data: " + data);
 }
 
@@ -163,7 +163,7 @@ require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "doj
             let query = new Query();
             query.returnGeometry = false;
             query.outFields = xInput2;
-            query.text = dom.byId("state").value;
+            query.text = dom.byId("DisplayField").value;
             console.log("getting ready to execute query")
             queryTask.execute(query, showResults2);
             console.log("executed query")
@@ -180,7 +180,7 @@ require(["dojo/dom", "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "doj
                     resultItems[attr] = Number(featureAttributes[attr]);  // this takes the JSON name and value and creates the equivalent object.
                 }
             }
-            draw(resultItems, dom.byId("state").value);
+            draw(resultItems, dom.byId("DisplayField").value);
            // dom.byId("info").innerHTML = resultItems;
         }
     }
@@ -204,11 +204,11 @@ function UpdateChart() {
     let y = d3.scaleLinear().rangeRound([height, 0]);
     let z = d3.scaleOrdinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#e2ab08"]);
 
-    function draw(data, state) {
+    function draw(data, DisplayField) {
         for (let attr in data)
             keys = Object.keys(data);
 
-        x0.domain([state]);
+        x0.domain([DisplayField]);
         x1.domain(keys).rangeRound([0, x0.bandwidth()]);
 
         y.domain([0, d3.max([data], function (d) {
@@ -317,7 +317,7 @@ function UpdateChart() {
                 let query = new Query();
                 query.returnGeometry = false;
                 query.outFields = xInput2;
-                query.text = dom.byId("state").value;
+                query.text = dom.byId("DisplayField").value;
                 queryTask.execute(query, showResults2);
             }
 
@@ -331,7 +331,7 @@ function UpdateChart() {
                         resultItems[attr] = Number(featureAttributes[attr]);
                     }
                 }
-                draw(resultItems, dom.byId("state").value);
+                draw(resultItems, dom.byId("DisplayField").value);
                 dom.byId("info").innerHTML = resultItems;
             }
         }
@@ -382,7 +382,7 @@ d3.select("#download").on("click", function () {
 });
 
 //----------------------------------------Create dropdown based on get request from url. Reads in JSON data. AJAX request
-
+/*
 function dropdownfunc() {
     let dropdown = document.getElementById('locality-dropdown');
     dropdown.length = 0;
@@ -394,7 +394,6 @@ function dropdownfunc() {
     dropdown.selectedIndex = 0;
 
     const url = ('https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5?f=json&pretty=true');
-    /* get request works, you can test with 'https://api.myjson.com/bins/7xq2x' */
 
     const request = new XMLHttpRequest();
 
@@ -437,3 +436,75 @@ function dropdownfunc() {
     //console.log("Calling Ajax send");
     request.send();
 }
+*/
+
+
+    require(["dojo/dom", "dojo/on", "dojo/dom-class", "dojo/_base/json", "dojo/_base/array", "dojo/string", "esri/request", "dojo/domReady!"], function(dom, on, domClass, dojoJson, array, dojoString, esriRequest) {
+
+        dom.byId("APIInput").value = "";
+        dom.byId("content").value = "";
+        //handle the Go button's click event
+        on(dom.byId("execute"), "click", getContent);
+
+
+        function getContent(){
+
+            var contentDiv = dom.byId("content");
+            contentDiv.value = "";
+            domClass.remove(contentDiv, "failure");
+            dom.byId("status").innerHTML = "Downloading...";
+
+            //get the url and setup a proxy
+            var url = dom.byId("APIInput").value;
+
+            if(url.length === 0){
+                alert("Please enter a URL");
+                return;
+            }
+
+            var requestHandle = esriRequest({
+                "url": url,
+                "content": {
+                    "f": "json"
+                },
+                "callbackParamName": "callback"
+            });
+            requestHandle.then(requestSucceeded, requestFailed);
+        }
+
+        function requestSucceeded(response, io){
+            var fieldInfo, pad;
+            pad = dojoString.pad;
+
+            //toJson converts the given JavaScript object
+            //and its properties and values into simple text
+            dojoJson.toJsonIndentStr = "  ";
+            console.log("response as text:\n", dojoJson.toJson(response, true));
+            dom.byId("status").innerHTML = "";
+
+            //show field names and aliases
+            if ( response.hasOwnProperty("fields") ) {
+                console.log("got some fields");
+                fieldInfo = array.map(response.fields, function(f) {
+                    return pad("Field:", 8, " ", true) + pad(f.name, 25, " ", true) +
+                        pad("Alias:", 8, " ", true) + pad(f.alias, 25, " ", true) +
+                        pad("Type:", 8, " ", true) + pad(f.type, 25, " ", true);
+                });
+                dom.byId("content").value = fieldInfo.join("\n");
+            } else {
+                dom.byId("content").value = "No field info found. Please double-check the URL.";
+            }
+
+        }
+        function requestFailed(error, io){
+
+            domClass.add(dom.byId("content"), "failure");
+
+            dojoJson.toJsonIndentStr = " ";
+            dom.byId("content").value = dojoJson.toJson(error, true);
+
+        }
+
+
+    });
+

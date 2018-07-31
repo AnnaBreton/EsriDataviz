@@ -66,16 +66,18 @@ body {
 }
 
 .form-style-7{
-    right: 100px;
+
     width: 300px;
     height: 450px;
-    border: 3px solid #7c7c7c;
+    border: 3px solid #313131;
     margin:-30px auto;
+    margin-left: 30%;
     background: #ffffff;
     border-radius:2px;
     padding:10px;
 
 }
+
 
 .form-style-7 h1{
     display: block;
@@ -182,4 +184,44 @@ body {
 .form-style-7 input[type="button"]:hover{
     background: #1d1d1d;
     color:#fff;
+}
+
+body{
+    font-family: "Arial Unicode MS, Arial, sans-serif";
+}
+ #content {
+     position: relative;
+     width: 800px;
+     height: 400px;
+     border: 3px solid #313131;
+     margin-top: -100%;
+     margin-left: 45%;
+     background: #ffffff;
+     border-radius:2px;
+     padding:10px;
+
+}
+.failure { color: red; }
+#status { font-size: 12px; }
+
+#IHead {
+
+    position:absolute;
+    margin-top: -453px;
+    right: 38%;
+    color: #7c7c7c;
+    font-size:x-large;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #FFFFFF;
+}
+
+#IContentInfo{
+    position:absolute;
+    margin-top: -425px;
+    right: 28%;
+    color: #7c7c7c;
+    font-size:small;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #FFFFFF;
+
 }

@@ -19,6 +19,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+    <script src="https://js.arcgis.com/3.25/"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.25/esri/css/esri.css">
 
 </head>
 <head>
@@ -44,13 +46,14 @@
                 <li>
                     <label for="APIInput">ArcGIS Rest API</label>
                     <input type="text" id="APIInput"  value="https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5">
-                    <span>Enter your url here</span>
+                    <span id="status">Enter your url here</span>
+
                 </li>
 
                 <li>
-                    <label for="state">State name</label>
-                    <input type="text" id="state" value="New York">
-                    <span>Enter your State name here</span>
+                    <label for="DisplayField">Display Field</label>
+                    <input type="text" id="DisplayField" value="New York">
+                    <span>Enter your services display field here</span>
                 </li>
 
                 <li>
@@ -61,7 +64,7 @@
 
                 <li>
                     <label for="title">Graph Title</label>
-                    <input id="title" type="text" name="title" value=" Graph Title">
+                    <input id="title" type="text" name="title" value=" Sample Title">
                     <span>Enter your title here</span>
                 </li>
 
@@ -77,15 +80,6 @@
                 <input id="execute" type="button" value="Get Details" onclick="xValues(),APIValue(), writeTitle()">
                 <input type="button" value="Clear Chart" onclick="clearChart();UpdateChart();">
                 <a id="download" href="#">Download SVG</button></a>
-
-                <br>
-                <br>
-                Dropdown test
-                <form action="http://httpbin.org/post" method="post">
-                <select onclick="dropdownfunc()"  id="locality-dropdown" name="locality" size="5" multiple>
-                </select>
-                    <input type="submit">
-                </form>
 
                 <br>
             </div>
@@ -104,5 +98,12 @@
 
     </form>
 </div>
-<p>Take a look at <a href="https://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5?f=json&pretty=true" target="_blank">test</a></p>
+
+</head>
+
+<h1 id="IHead">Content</h1>
+<p id="IContentInfo">Your selected ArcGIS Service info. Here we'll display Field names, aliases and types:</p>
+<textarea id="content"></textarea>
+
+
 </body>
